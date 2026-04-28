@@ -1,0 +1,17 @@
+You are reviewing a staged git diff before push.
+
+Focus only on:
+1. correctness bugs
+2. regressions
+3. missing tests
+4. security risks
+
+Ignore style-only suggestions.
+
+If there are no serious issues, output exactly:
+REVIEW_STATUS: PASS
+
+If there are serious issues, output exactly:
+REVIEW_STATUS: FAIL
+
+Then list the findings briefly with file references when possible.
