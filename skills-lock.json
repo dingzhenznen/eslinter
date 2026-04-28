@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "generate-github-workflow": {
+      "source": "nesnilnehc/ai-cortex",
+      "sourceType": "github",
+      "skillPath": "skills/generate-github-workflow/SKILL.md",
+      "computedHash": "407fa34b81a0f2e2a3ce45d27e8a0f883a28aed55bedb6763e73d762782d63da"
+    },
     "playwright-cli": {
       "source": "microsoft/playwright-cli",
       "sourceType": "github",
