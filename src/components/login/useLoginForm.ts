@@ -24,14 +24,22 @@ interface UseLoginFormReturn {
 }
 
 function validateUsername(username: string): string | undefined {
-  if (!username) return '请输入用户名'
-  if (username.length < 3 || username.length > 20) return '用户名需3-20个字符'
+  if (!username) {
+    return '请输入用户名'
+  }
+  if (username.length < 3 || username.length > 20) {
+    return '用户名需3-20个字符'
+  }
   return undefined
 }
 
 function validatePassword(password: string): string | undefined {
-  if (!password) return '请输入密码'
-  if (password.length < 6) return '密码至少6个字符'
+  if (!password) {
+    return '请输入密码'
+  }
+  if (password.length < 6) {
+    return '密码至少6个字符'
+  }
   return undefined
 }
 

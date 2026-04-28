@@ -36,8 +36,6 @@ export async function POST(request: Request) {
 
   const secret = process.env.JWT_SECRET
 
-  console.log('secret', secret)
-
   if (!secret) {
     return NextResponse.json(
       {
