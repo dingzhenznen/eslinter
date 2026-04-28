@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## ESLinter
 
-## Getting Started
+A small Next.js 16 application with a login page and `/api/login` endpoint.
 
-First, run the development server:
+## Requirements
+
+- Node.js 22 or newer
+- npm
+- `JWT_SECRET` for the login API
+
+## Development
+
+Install dependencies and start the dev server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+JWT_SECRET=dev-secret npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Build the app locally:
 
-## Learn More
+```bash
+JWT_SECRET=dev-secret npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+The production build uses `next build --webpack` and `output: "standalone"` so it can be packaged into a small runtime image.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Docker
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Build the production image:
 
-## Deploy on Vercel
+```bash
+docker build -t eslinter .
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run the container:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+docker run -p 3000:3000 -e JWT_SECRET=your-secret eslinter
+```
+
+## Docker Compose
+
+Start with Compose:
+
+```bash
+JWT_SECRET=your-secret docker compose up --build
+```
+
+The app listens on `http://localhost:3000`.
+
+## Notes
+
+- Do not commit a real `JWT_SECRET`.
+- The Docker image runs the standalone Next.js server with `node server.js`.
+- Remote Google Fonts were removed so production builds work in restricted network environments.

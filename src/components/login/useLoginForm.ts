@@ -44,14 +44,14 @@ export function useLoginForm({ onSubmit }: UseLoginFormProps = {}): UseLoginForm
 
   const setUsername = useCallback((value: string) => {
     setUsernameState(value)
-    const validationError = validateUsername(value)
-    setErrors(prev => ({ ...prev, username: validationError }))
+    // 输入时清除错误，而不是验证
+    setErrors(prev => ({ ...prev, username: undefined }))
   }, [])
 
   const setPassword = useCallback((value: string) => {
     setPasswordState(value)
-    const validationError = validatePassword(value)
-    setErrors(prev => ({ ...prev, password: validationError }))
+    // 输入时清除错误，而不是验证
+    setErrors(prev => ({ ...prev, password: undefined }))
   }, [])
 
   const toggleVisibility = () => setIsVisible(v => !v)

@@ -1,0 +1,22 @@
+- main [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - paragraph [ref=e7]: Welcome Back
+        - heading "欢迎回来" [level=1] [ref=e8]
+        - paragraph [ref=e9]: 请登录您的账户
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e12]: 用户名
+          - textbox "用户名" [ref=e13]:
+            - /placeholder: 请输入用户名
+        - generic [ref=e14]:
+          - generic [ref=e15]: 密码
+          - generic [ref=e16]:
+            - textbox "密码" [ref=e17]:
+              - /placeholder: 请输入密码
+            - button "显示密码" [ref=e18]: 显示
+        - button "登录" [ref=e19]
+      - link "忘记密码？" [ref=e21] [cursor=pointer]:
+        - /url: "#"
+    - paragraph [ref=e22]: "测试账号: admin / 123456"
