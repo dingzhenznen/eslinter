@@ -1,0 +1,52 @@
+name: Deploy K8s
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Image tag to deploy
+        required: true
+        default: latest
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-k8s-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy To ACK
+    runs-on: ubuntu-latest
+    env:
+      KUBE_NAMESPACE: default
+      DEPLOYMENT_NAME: services1
+      CONTAINER_NAME: fastgpt1
+      IMAGE_REPOSITORY: ghcr.io/${{ github.repository }}
+
+    steps:
+      - name: Set Up Kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Configure Kubeconfig
+        run: |
+          mkdir -p "$HOME/.kube"
+          printf '%s' "${KUBECONFIG_DATA}" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
+
+      - name: Update Deployment Image
+        run: |
+          kubectl set image deployment/${DEPLOYMENT_NAME} \
+            ${CONTAINER_NAME}=${IMAGE_REPOSITORY}:${IMAGE_TAG} \
+            --namespace "${KUBE_NAMESPACE}"
+        env:
+          IMAGE_TAG: ${{ inputs.image_tag }}
+
+      - name: Wait For Rollout
+        run: |
+          kubectl rollout status deployment/${DEPLOYMENT_NAME} \
+            --namespace "${KUBE_NAMESPACE}" \
+            --timeout=5m
