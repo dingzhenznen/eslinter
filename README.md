@@ -1,4 +1,4 @@
-## ESLinter
+# ESLinter
 
 A small Next.js 16 application with a login page and `/api/login` endpoint.
 
